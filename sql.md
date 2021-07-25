@@ -15,11 +15,12 @@ Q: What is the total number of posts posted yesterday for each type of report?
 
 **answer**
 
+```sql
 SELECT count(1)
 FROM post
 WHERE DATE = DATE() - INTERVAL('1 DAY')
 GROUP BY report_type
-
+```
 
 Q2: When a post is reported by the user as spam, the reviewers will manually review and remove them. Given the table about review_removal
 
