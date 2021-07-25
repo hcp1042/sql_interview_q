@@ -10,7 +10,7 @@ ORDER BY 1
 
 512
 
-``sql
+```sql
 SELECT activity.player_id, device_id
 FROM activity
 JOIN
