@@ -20,3 +20,32 @@ GROUP BY 1) first_login
 ON activity.player_id = first_login.player_id
 AND activity.event_date = first_login.event_date
 ```
+ or window function rank() can be used  (partition by player_id
+ 
+ 
+ 534
+ 
+ ```sql
+ SELECT player_id, event_date,
+ sum(games_played) (PARTITION BY player_id ORDER BY event_date) as game_played_so_far
+ FROM activity
+ ORDER BY 1,2
+ 
+ ```
+ 
+ 
+ 550
+ 
+ ```sql
+ (SELECT player_id, min(event_date) as first_login_date 
+ FROM activity
+ GROUP BY 1) a
+ JOIN
+ activity b
+ ON a.player_id = b.player_id
+ AND a.first_login_date + interval('1 day') = b.event_date
+ ```
+ 
+ tips:
+ SELECT ROUND(COUNT(DISTINCT b.player_id)/COUNT(DISTINCT a.player_id), 2) AS fraction FROM Activity AS a
+LEFT JOIN
