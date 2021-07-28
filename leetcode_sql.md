@@ -33,8 +33,7 @@ AND activity.event_date = first_login.event_date
  
  ```
  
- 
- 550
+  550
  
  ```sql
  (SELECT player_id, min(event_date) as first_login_date 
@@ -49,3 +48,36 @@ AND activity.event_date = first_login.event_date
  tips:
  SELECT ROUND(COUNT(DISTINCT b.player_id)/COUNT(DISTINCT a.player_id), 2) AS fraction FROM Activity AS a
 LEFT JOIN
+
+ 
+ 
+ **7/27**
+ 
+ 
+ 577
+ 
+ ```sql
+ SELECT name, bonus
+ FROM employee
+ LEFT JOIN bonus
+ ON employee.empid = bonus.empid
+ WHERE bonus < 1000
+ or bonus IS NULL
+ 
+ 
+ ```
+ 
+ 
+ 574
+ ```sql
+
+SELECT a.name
+FROM candidate a
+JOIN
+(SELECT candidate_id, count(id)
+FROM vote
+LIMIT 1
+GROUP BY 2
+ORDER BY count(id) Desc) sub      -- can use count() for sorting and not select count(id)
+on a.id = b.candidate_id
+```
