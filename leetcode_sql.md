@@ -81,3 +81,20 @@ GROUP BY 2
 ORDER BY count(id) Desc) sub      -- can use count() for sorting and not select count(id)
 on a.id = b.candidate_id
 ```
+
+
+
+570
+find manager that has at least 5 directs
+
+```sql
+SELECT emp.name
+FROM employee emp
+JOIN
+(SELECT managerID
+FROM employee
+GROUP BY managerID
+HAVING count(Distinct Id) >= 5) sub
+ON emp.Id = sub.managerID
+
+```
