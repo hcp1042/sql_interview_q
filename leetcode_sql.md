@@ -98,3 +98,37 @@ HAVING count(Distinct Id) >= 5) sub
 ON emp.Id = sub.managerID
 
 ```
+
+
+7/28
+
+578
+
+get highest answer rate question
+
+ 
+ 
+ 
+580
+
+department student number
+```sql
+SELECT dept.dept_name, sub.student_number
+FROM department AS dept
+LEFT JOIN 
+(select dept_id, count(student_id) as student_number
+FROM student
+GROUP BY 1) sub
+ON dept.dept_id = sub.dept_id
+ORDER BY 2 DESC, 1
+```
+
+
+584
+
+-not equal:  <>-
+```sql
+SELECT name
+FROM customer
+WHERE referral_id <> 2 
+OR referral_id IS NULL
