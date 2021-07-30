@@ -132,7 +132,7 @@ SELECT name
 FROM customer
 WHERE referral_id <> 2 
 OR referral_id IS NULL
-
+```
 
 585
 
