@@ -126,9 +126,33 @@ ORDER BY 2 DESC, 1
 
 584
 
--not equal:  <>-
+_not equal:  <>_
 ```sql
 SELECT name
 FROM customer
 WHERE referral_id <> 2 
 OR referral_id IS NULL
+
+
+585
+
+investment
+
+```sql
+SELECT sum(TIV_2016) as TIV_2016
+FROM insurance
+WHERE
+TIV_2015 IN
+(SELECT TIV_2015
+FROM insurance
+GROUP BY TIV_2015
+HAVING COUNT(DISTINCT PID) > 1)
+AND
+CONCAT(LAT,',',LON) IN
+(SELECT CONCAT(LAT,',',LON)
+FROM insurance
+GROUP BY CONCAT(LAT,',',LON)
+ HAVING count(*)=1)
+)
+
+```
